@@ -1,0 +1,135 @@
+/* Importar fuentes de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Lora:wght@400;700&display=swap');
+
+/* Estilos generales para el cuerpo de la página */
+body {
+    background-color: #1a1a1a; /* Fondo negro oscuro */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Asegura que ocupe toda la altura de la ventana */
+    font-family: 'Lora', serif; /* Fuente general para el cuerpo */
+    color: #DDDDDD; /* Un gris claro para el texto general si lo hay fuera de la carta */
+    overflow: hidden; /* Oculta el scrollbar durante la animación */
+}
+
+/* Contenedor para la animación de la carta */
+.letter-wrapper {
+    position: relative;
+    width: 80%;
+    max-width: 700px;
+    /* Estado inicial: comprimido y rotado */
+    transform: scaleY(0) perspective(1000px) rotateX(90deg);
+    opacity: 0; /* Inicialmente invisible */
+    transform-origin: center center; /* El origen de la transformación es el centro */
+    /* La transición se moverá a .letter-wrapper.is-open */
+    will-change: transform, opacity; /* Sugerencia al navegador para optimización */
+}
+
+/* Estado abierto de la carta */
+.letter-wrapper.is-open {
+    transform: scaleY(1) perspective(1000px) rotateX(0deg); /* Estado final: abierto y sin rotación */
+    opacity: 1; /* Visible */
+    /* Aquí definimos la transición para cuando se abre */
+    transition: transform 1.5s ease-out, opacity 1.5s ease-out;
+}
+
+/* Estado de cierre de la carta */
+.letter-wrapper.is-closing {
+    /* Se comprime y rota hacia atrás */
+    transform: scaleY(0) perspective(1000px) rotateX(-90deg);
+    opacity: 0; /* Invisible */
+    /* Y aquí para cuando se cierra */
+    transition: transform 1.5s ease-out, opacity 1.5s ease-out;
+}
+
+/* Estilo para la "carta" (el contenido dentro del wrapper) */
+.carta {
+    background-color: #F5DEB3; /* Color beige/antiguo claro para el fondo de la carta */
+    padding: 30px; /* Aumentamos el padding para más espacio */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Sombra más pronunciada */
+    width: 100%; /* Ocupa el 100% del letter-wrapper */
+    border: 5px solid; /* Borde más grueso para el efecto dorado */
+    border-image: linear-gradient(to bottom right, #8B4513, #856748, #977e3f, #CD853F, #8B4513) 1;
+    /* Degradado dorado oscuro para el borde. Los colores son:
+       #8B4513: SaddleBrown (marrón oscuro, casi dorado oxidado)
+       #CD853F: Peru (marrón claro, tono dorado)
+       #DAA520: Goldenrod (dorado más brillante)
+    */
+    text-align: justify; /* Justificamos el texto dentro de la carta para un estilo más formal */
+    box-sizing: border-box; /* Asegura que padding y border se incluyan en el width/height */
+}
+
+/* Estilos para los encabezados (h1) y párrafos (p) dentro de la carta */
+.carta h1,
+.carta p {
+    font-family: 'Cinzel Decorative', serif; /* Fuente gótica, elegante y legible */
+    color: #5e0f0f; /* Rojo sangre oscuro */
+    text-align: center; /* Centrar el título de la carta */
+    margin-bottom: 20px; /* Espacio debajo de párrafos y títulos */
+    line-height: 1.6; /* Aumentamos el interlineado para mejor legibilidad */
+    /* Efecto de brillo tipo "gotitas de sangre" */
+    text-shadow:
+        0 0 5px rgba(107, 31, 31, 0.7),   /* Sombra roja pequeña y difusa */
+        0 0 10px rgba(117, 25, 25, 0.5),  /* Sombra roja mediana */
+        0 0 15px rgba(92, 16, 16, 0.3),  /* Sombra roja grande */
+        0 0 20px rgba(139, 0, 0, 0.2);  /* Sombra más oscura para el halo exterior */
+}
+
+/* Solo para los párrafos dentro de la carta, si quieres un estilo ligeramente diferente */
+.carta p {
+    font-family: 'Lora', serif; /* Fuente más legible para el cuerpo del texto */
+    font-size: 1.1em; /* Un poco más grande para mejor lectura */
+    text-indent: 2em; /* Sangría en la primera línea de cada párrafo para un toque más clásico */
+    text-align: justify; /* Asegura que el texto del párrafo se justifique */
+}
+
+/* Estilo para el botón "SEGUIR LEYENDO" */
+.btn {
+    display: block;
+    width: fit-content;
+    margin: 30px auto 0;
+    padding: 10px 20px;
+    background-color: #5C4033;
+    color: #F5DEB3;
+    text-decoration: none;
+    border: 2px solid #DAA520;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.1em;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.btn:hover {
+    background-color: #DAA520;
+    color: #1a1a1a;
+    border-color: #F5DEB3;
+}
+/* Estilo extra para darle un toque victoriano */
+.carta-victoriana {
+    background-image: url('textura-victoriana.jpg'); /* Asegúrate de tener esta imagen en tu carpeta */
+    background-size: cover;
+    background-blend-mode: multiply;
+    background-color: #fdf6e3;
+    border-radius: 20px;
+    font-family: 'Cinzel Decorative', serif;
+    border: 6px double #8B0000;
+    box-shadow: 0 0 40px rgba(139, 0, 0, 0.8), 0 0 80px rgba(218, 165, 32, 0.3);
+    animation: aperturaVictoriana 1.5s ease-out forwards;
+}
+
+/* Animación adicional si deseas un toque extra */
+@keyframes aperturaVictoriana {
+    0% {
+        transform: scaleY(0) rotateX(90deg);
+        opacity: 0;
+    }
+    100% {
+        transform: scaleY(1) rotateX(0deg);
+        opacity: 1;
+    }
+}
